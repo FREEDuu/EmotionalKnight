@@ -7,9 +7,9 @@ import { buttonAnimations } from "../../costants/ButtonAnimation";
 
 const defaultButtonOptions = {
   text: "",
-  width: 320,
-  height: 320,
-  fontSize: 36,
+  width: 750,
+  height: 512,
+  fontSize: 130,
 };
 
 type ButtonOptions = typeof defaultButtonOptions;
@@ -22,7 +22,7 @@ export class Button extends FancyButton {
     const opts = { ...defaultButtonOptions, ...options };
 
     super({
-      defaultView: "button.png",
+      defaultView: "newButton.png",
       anchor: 0.5,
       text: new Label({
         text: opts.text,
@@ -30,6 +30,7 @@ export class Button extends FancyButton {
           fill: 0x000000,
           align: "center",
           fontSize: opts.fontSize,
+          fontFamily: "Font",
         },
       }),
       defaultTextAnchor: 0.5,
@@ -50,5 +51,10 @@ export class Button extends FancyButton {
 
   private handleDown() {
     engine().audio.sfx.play("main/sounds/sfx-press.wav");
+  }
+
+  public resize(width: number, height: number, offset: number = 0) {
+    this.x = width / 2 ;
+    this.y = height / 2 + offset;
   }
 }

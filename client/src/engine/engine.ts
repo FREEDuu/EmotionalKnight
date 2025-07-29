@@ -33,23 +33,35 @@ extensions.add(CreationNavigationPlugin);
  *
  * It also initializes the PixiJS application and loads any assets in the `preload` bundle.
  */
+
 export class CreationEngine extends Application {
   /** Initialize the application */
   public async init(opts: Partial<ApplicationOptions>): Promise<void> {
+
     opts.resizeTo ??= window;
     opts.resolution ??= getResolution();
-
     await super.init(opts);
 
     // Append the application canvas to the document body
     document.getElementById("pixi-container")!.appendChild(this.canvas);
+    
     // Add a visibility listener, so the app can pause sounds and screens
     document.addEventListener("visibilitychange", this.visibilityChange);
 
     // Init PixiJS assets with this asset manifest
     await Assets.init({ manifest, basePath: "assets" });
     await Assets.loadBundle("preload");
-
+    await Assets.load({
+        src: 'font.ttf',
+        data: {
+            family: 'Font', 
+        }
+    });
+    await Assets.load({
+        src: 'tile.png',
+        
+    });
+    
     // List all existing bundles names
     const allBundles = manifest.bundles.map((item) => item.name);
     // Start up background loading of all bundles

@@ -1,9 +1,9 @@
 import { animate } from "motion";
 import type { ObjectTarget } from "motion/react";
 import { Container, Sprite } from "pixi.js";
-import { MyBackground } from "../ui/MyBackground";
+import { MyBackground } from "../../../ui/MyBackground";
 
-export class LoadScreen extends Container {
+export class StartRoomScreen extends Container {
 
   private pixiLogo: Sprite;
   private bg: MyBackground = new MyBackground();
